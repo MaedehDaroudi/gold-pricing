@@ -1,25 +1,23 @@
-version: "3.8"
-
 services:
   postgres:
-    image: postgres:latest
-    container_name: postgres_db
-    restart: always
+    image: ${POSTGRES_IMAGE}
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    restart: ${POSTGRES_RESTART_STATUS}
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: IIJ01X2F
-      POSTGRES_DB: gold_pricing_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: POSTGRES_DATABASE
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data:${POSTGRES_VOLUMES}
 
   redis:
-    image: redis:latest
-    container_name: redis_db
-    restart: always
+    image: ${REDIS_IMAGE}
+    container_name: ${REDIS_CONTAINER_NAME}
+    restart: ${REDIS_RESTART_STATUS}
     ports:
-      - "6379:6379"
-
+      - "${REDIS_PORT}:6379"
 volumes:
   pg_data:
+    driver: local
