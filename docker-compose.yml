@@ -1,16 +1,82 @@
 services:
-  postgres:
-    image: ${POSTGRES_IMAGE}
-    container_name: ${POSTGRES_CONTAINER_NAME}
-    restart: ${POSTGRES_RESTART_STATUS}
+  
+  market-data-service:
+    build: ./market-data-service
+    container_name: ${MARKET_DATA_CONTAINER_NAME}
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: POSTGRES_DATABASE
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${MARKET_DATA_DB_DATABASE}
+      - POSTGRES_HOST=${MARKET_DATA_DB_HOST}
+      - POSTGRES_PORT=${MARKET_DATA_DB_PORT}
+    depends_on: 
+      - market-data-db
     ports:
-      - "${POSTGRES_PORT}:5432"
-    volumes:
-      - pg_data:${POSTGRES_VOLUMES}
+      - "${MARKET_DATA_PORT}:8000"
+
+  market-data-db:
+    image: ${POSTGRES_IMAGE}
+    container_name: ${MARKET_DATA_DB_CONTAINER_NAME}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${MARKET_DATA_DB_DATABASE}
+    ports:
+      - "5433:5432"
+
+
+      
+  
+  order-service:
+    build: ./order-service
+    container_name: ${ORDER_CONTAINER_NAME}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${ORDER_DB_DATABASE}
+      - POSTGRES_HOST=${ORDER_DB_HOST}
+      - POSTGRES_PORT=${ORDER_DB_PORT}
+    depends_on:
+      - order-db
+    ports:
+      - "${ORDER_PORT}:8000"
+
+  order-db:
+    image: ${POSTGRES_IMAGE}
+    container_name: ${ORDER_DB_CONTAINER_NAME}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${ORDER_DB_DATABASE}
+    ports:
+      - "5434:5432"
+
+
+  
+  pricing-service:
+    build: ./pricing-service
+    container_name: ${PRICING_CONTAINER_NAME}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${PRICING_DB_DATABASE}
+      - POSTGRES_HOST=${PRICING_DB_HOST}
+      - POSTGRES_PORT=${PRICING_DB_PORT}
+    depends_on: 
+      - pricing-db
+    ports:
+      - "${PRICING_PORT}:8000"
+
+  pricing-db:
+    image: ${POSTGRES_IMAGE}
+    container_name: ${PRICING_DB_CONTAINER_NAME}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${PRICING_DB_DATABASE}
+    ports:
+      - "5435:5432"
+
 
   redis:
     image: ${REDIS_IMAGE}
