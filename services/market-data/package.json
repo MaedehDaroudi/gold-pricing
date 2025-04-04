@@ -1,7 +1,7 @@
 {
-  "name": "-service",
+  "name": "market-data-service",
   "version": "1.0.0",
-  "description": " service",
+  "description": "market data management service",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
