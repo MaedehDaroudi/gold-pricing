@@ -8,7 +8,7 @@ class Server {
 
     static async connect() {
         const app = express();
-        app.use(routes);
+        app.use('/api/order', routes);
 
         const server = http.createServer(app);
         server.listen(process.env.SERVER_PORT, () => {

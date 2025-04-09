@@ -6,9 +6,9 @@ const routes = require('./routes');
 class Server {
     constructor() { }
 
-    static async connect() {
+    static connect() {
         const app = express();
-        app.use(routes);
+        app.use('/api/market-data', routes);
 
         const server = http.createServer(app);
         server.listen(process.env.SERVER_PORT, () => {
