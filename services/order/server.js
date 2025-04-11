@@ -9,10 +9,9 @@ class Server {
     static async connect() {
         const app = express();
         app.use('/api/order', routes);
-
         const server = http.createServer(app);
-        server.listen(process.env.ORDER_SERVER_PORT, () => {
-            console.log('Server is running');
+        server.listen(process.env.MARKET_DATA_SERVER_PORT || 8003, () => {
+            console.log('Server is running in port: ', process.env.MARKET_DATA_SERVER_PORT || 8003);
         });
     }
 }
