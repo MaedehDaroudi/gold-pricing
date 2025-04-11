@@ -1,16 +1,18 @@
 class MarketDataDtol {
-    #receiveGolData;
+    #fetchGolData;
+    #receiveGoldData;
     constructor() {
-        this.#receiveGolData = {
+        this.#fetchGolData = {
             url: null,
             method: null,
             headers: null,
             maxBodyLength: null,
         }
+        this.#receiveGoldData = null
     }
 
-    set receiveGoldDataModel(data) {
-        this.#receiveGolData = {
+    set fetchGoldDataModel(data) {
+        this.#fetchGolData = {
             method: 'get',
             maxBodyLength: Infinity,
             url: 'https://www.goldapi.io/api/XAU/USD',
@@ -18,8 +20,16 @@ class MarketDataDtol {
         }
     }
 
+    set receiveGoldDataModel(data) {
+        this.#receiveGoldData = {}
+    }
+
+    get fetchGoldDataModel() {
+        return this.#fetchGolData;
+    }
+
     get receiveGoldDataModel() {
-        return this.#receiveGolData;
+        return this.#receiveGoldData;
     }
 }
 

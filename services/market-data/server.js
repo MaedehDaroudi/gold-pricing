@@ -6,13 +6,12 @@ const routes = require('./routes');
 class Server {
     constructor() { }
 
-    static connect() {
+    static async connect() {
         const app = express();
         app.use('/api/market-data', routes);
-
         const server = http.createServer(app);
-        server.listen(process.env.SERVER_PORT, () => {
-            console.log('Server is running');
+        server.listen(process.env.MARKET_DATA_SERVER_PORT || 8002, () => {
+            console.log('Server is running in port: ', process.env.MARKET_DATA_SERVER_PORT||8002);
         });
     }
 }

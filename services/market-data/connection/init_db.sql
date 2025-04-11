@@ -1,0 +1,31 @@
+CREATE DATABASE postgres;
+
+CREATE TABLE market_data (
+    id SERIAL PRIMARY KEY,         
+    timestamp BIGINT NOT NULL,     
+    metal VARCHAR(10) NOT NULL,    
+    currency VARCHAR(10) NOT NULL, 
+    exchange VARCHAR(50) NOT NULL, 
+    symbol VARCHAR(50) NOT NULL,   
+    prev_close_price NUMERIC(12, 2),
+    open_price NUMERIC(12, 2),     
+    low_price NUMERIC(12, 2),      
+    high_price NUMERIC(12, 2),     
+    open_time BIGINT NOT NULL,     
+    price NUMERIC(12, 2),          
+    ch NUMERIC(12, 2),             
+    chp NUMERIC(12, 2),            
+    ask NUMERIC(12, 2),            
+    bid NUMERIC(12, 2),            
+    price_gram_24k NUMERIC(12, 4), 
+    price_gram_22k NUMERIC(12, 4), 
+    price_gram_21k NUMERIC(12, 4), 
+    price_gram_20k NUMERIC(12, 4), 
+    price_gram_18k NUMERIC(12, 4), 
+    price_gram_16k NUMERIC(12, 4), 
+    price_gram_14k NUMERIC(12, 4), 
+    price_gram_10k NUMERIC(12, 4),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    deleted BOOLEAN DEFAULT false    
+);

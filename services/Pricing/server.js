@@ -11,7 +11,7 @@ class Server {
         app.use('/api/pricing',routes);
 
         const server = http.createServer(app);
-        server.listen(process.env.SERVER_PORT, () => {
+        server.listen(process.env.PRICING_SERVER_PORT, () => {
             console.log('Server is running');
         });
     }

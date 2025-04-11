@@ -6,8 +6,8 @@ class PostgreSQL {
         const pool = new Pool({
             port: process.env.POSTGRES_PORT,
             user: process.env.POSTGRES_USER,
-            host: process.env.POSTGRES_HOST,
-            database: process.env.POSTGRES_DATABASE,
+            host: process.env.ORDER_DB_HOST,
+            database: process.env.ORDER_DB_DATABASE,
             password: process.env.POSTGRES_PASSWORD,
         });
         return pool
