@@ -5,8 +5,9 @@ const orderController = new OrderController()
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send(200)
+router.get('/', async (req, res) => {
+    const result = await orderController.receiveOrders(req, res)
+    res.send(result)
 })
 
 router.post('/', validateSchema(schema.createOrder), async (req, res) => {

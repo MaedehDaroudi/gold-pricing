@@ -19,6 +19,13 @@ class OrderBusinessLogic {
         return result
     }
 
+    async receiveOrders(data) {
+        const result = await orderRepository.receiveOrders(data)
+        if (!result.length)
+            throw response.generate(404,response.messages.notFoundOrder)
+        return result
+    }
+
     async #checkAbilityContinues(data, users, goldStatus, goldInventory) {
         const models = new Models();
         await Promise.allSettled([

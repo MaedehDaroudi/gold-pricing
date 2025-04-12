@@ -1,7 +1,10 @@
 class Dtos {
-    #createOrder
+    #createOrder;
+    #receiveOrders;
+
     constructor() {
         this.#createOrder = {}
+        this.#receiveOrders = {}
     }
 
     set createOrderDto(data) {
@@ -17,8 +20,18 @@ class Dtos {
         }
     }
 
+    set receiveOrdersDtoModel(data) {
+        this.#receiveOrders = {
+            id:data.id
+        }
+    }
+
     get createOrderDto() {
         return this.#createOrder
+    }
+
+    get receiveOrdersDtoModel() {
+        return this.#receiveOrders
     }
 }
 

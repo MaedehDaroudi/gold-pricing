@@ -18,6 +18,17 @@ class OrderRepository {
         return Response.messages.successCreateOrder;
     }
 
+    async receiveOrders(data) {
+        const localKey = data.id ? `orders_data_${data.id}` : 'orders_data'
+        const orderData = await redis.cacheGet(localKey)
+        if (orderData)
+            return orderData
+        const { query, value } = Queries.receiveOrders(data.id)
+        const orders = await postgres.query(query, value)
+        await redis.CacheSet(localKey, orders.rows)
+        return orders.rows;
+    }
+
     async receiveGoldStatus(GoldStatusId) {
         const { query, value } = Queries.receiveGoldStatus(GoldStatusId)
         const result = await postgres.query(query, value)

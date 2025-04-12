@@ -15,9 +15,10 @@ class Response {
     }
 
     static messages = {
+        notFoundOrder:'سفارش یافت نشد',
         successCreateOrder: 'سفارش با موفقیت ثبت شد',
         InsufficientProductInventory: 'موجودی محصول کافی نیست',
-        goldNotActive: 'ثبت سفارش فقط برای طلا با وضعیت فعال ممکن است'
+        goldNotActive: 'ثبت سفارش فقط برای طلا با وضعیت فعال ممکن است' ,
     }
 }
 

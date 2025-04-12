@@ -1,5 +1,51 @@
 CREATE DATABASE postgres;
 
+CREATE TABLE IF NOT EXISTS public.roles
+(
+    name text COLLATE pg_catalog."default" NOT NULL,
+    create_date date DEFAULT CURRENT_TIMESTAMP,
+    deleted integer DEFAULT 0,
+    id integer NOT NULL DEFAULT nextval('market_data_id_seq'::regclass),
+    CONSTRAINT roles_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.roles
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    name "char",
+    phone "char",
+    email "char",
+    create_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date date DEFAULT CURRENT_TIMESTAMP,
+    id integer NOT NULL DEFAULT nextval('market_data_id_seq'::regclass),
+    deleted boolean DEFAULT false,
+    role_id integer,
+    CONSTRAINT users_pkey PRIMARY KEY (id),
+    CONSTRAINT role_id_fk FOREIGN KEY (role_id)
+        REFERENCES public.roles (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+CREATE INDEX IF NOT EXISTS fki_role_id_fk
+    ON public.users USING btree
+    (role_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+
+
+
+
 CREATE TABLE gold_status (
   id SERIAL PRIMARY KEY,           
   name VARCHAR(50) UNIQUE NOT NULL, 

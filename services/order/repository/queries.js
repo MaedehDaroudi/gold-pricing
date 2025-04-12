@@ -16,6 +16,18 @@ class Queries {
         }
     }
 
+    static receiveOrders(id) {
+        const result = {
+            query: `select * from orders`,
+            value: []
+        }
+        if (id) {
+            result.query += ' where id=$1'
+            result.value.push(+id)
+        }
+        return result
+    }
+
     static updateInventory(weight, gold_id) {
         return {
             query: `UPDATE "gold_inventory" SET "currentQuantity"  = "currentQuantity"  - $1 WHERE id = $2;`,
