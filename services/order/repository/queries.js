@@ -15,6 +15,13 @@ class Queries {
         }
     }
 
+    static updateInventory(weight, gold_id) {
+        return {
+            query: `UPDATE gold_inventory SET quantity = quantity - $1 WHERE id = $2;`,
+            value: [weight, gold_id]
+        }
+    }
+
     static receiveMarketData(marketId) {
         return {
             query: `select * from market_data where id=$1`,

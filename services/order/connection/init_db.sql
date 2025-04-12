@@ -78,15 +78,16 @@ CREATE TABLE orders (
 
 CREATE TABLE order_status (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(50) UNIQUE NOT NULL, 
-  description TEXT                  
+  name VARCHAR(50) UNIQUE NOT NULL,
+   create_date TIMESTAMP DEFAULT NOW(),  
+  deleted BOOLEAN DEFAULT FALSE                
 );
 
 INSERT INTO order_status (name, description) 
 VALUES
-('pending', 'در انتظار پرداخت یا تأیید سفارش'),
-('processing', 'در حال آماده‌سازی و بررسی'),
-('shipped', 'ارسال شده'),
-('delivered', 'تحویل داده شده'),
-('canceled', 'لغو شده توسط کاربر یا سیستم'),
-('failed', 'پرداخت ناموفق یا خطا در ثبت سفارش');
+('pending'),
+('processing'),
+('shipped'),
+('delivered'),
+('canceled'),
+('failed');

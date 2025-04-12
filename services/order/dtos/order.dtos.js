@@ -13,7 +13,7 @@ class Dtos {
             status_id: data.status_id,
             total_price: data.total_price,
             price_per_gram: data.price_per_gram,
-            market_data_id: data.market_data_id,
+            market_data_id: null,
         }
     }
 

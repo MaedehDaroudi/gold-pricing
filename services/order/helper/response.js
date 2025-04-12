@@ -15,7 +15,9 @@ class Response {
     }
 
     static messages = {
-        successCreateOrder: 'سفارش با موفقیت ثبت شد'
+        successCreateOrder: 'سفارش با موفقیت ثبت شد',
+        InsufficientProductInventory: 'موجودی محصول کافی نیست',
+        goldNotActive: 'ثبت سفارش فقط برای طلا با وضعیت فعال ممکن است'
     }
 }
 
