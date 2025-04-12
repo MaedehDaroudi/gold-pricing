@@ -14,6 +14,7 @@ class OrderRepository {
         await postgres.query(updateInventoryQuery.query, updateInventoryQuery.value)
 
         await redis.cacheDel('orders_data')
+        await redis.cacheDel('gold_inventory')
         return Response.messages.successCreateOrder;
     }
 

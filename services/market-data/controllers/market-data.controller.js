@@ -11,17 +11,17 @@ class MarketDataController {
 
     async fetchMarketData(req, res) {
         const marketDataDtos = new MarketDataDtos();
-        marketDataDtos.fetchGoldDataModel = null
-        const fetchGoldDataModel = marketDataDtos.fetchGoldDataModel
-        const result = await marketDataBusinessLogic.fetchMarketData(fetchGoldDataModel)
+        marketDataDtos.fetchGoldDataDto = null
+        const fetchGoldDataDto = marketDataDtos.fetchGoldDataDto
+        const result = await marketDataBusinessLogic.fetchMarketData(fetchGoldDataDto)
         res.send(Response.generate(200, { message: 'اطلاعات با موفقیت دریافت شد.' }))
     }
 
     async receiveMarketData(req, res) {
         const marketDataDtos = new MarketDataDtos();
-        marketDataDtos.receiveGoldDataModel = null
-        const receiveGoldDataModel = marketDataDtos.receiveGoldDataModel
-        const result = await marketDataBusinessLogic.receiveMarketData(receiveGoldDataModel)
+        marketDataDtos.receiveGoldDataDto = null
+        const receiveGoldDataDto = marketDataDtos.receiveGoldDataDto
+        const result = await marketDataBusinessLogic.receiveMarketData(receiveGoldDataDto)
         res.send(Response.generate(200, result))
     }
 }

@@ -1,6 +1,7 @@
 class Queries {
     constructor() { }
 
+
     static createOrder(data) {
         return {
             query: `
@@ -17,7 +18,7 @@ class Queries {
 
     static updateInventory(weight, gold_id) {
         return {
-            query: `UPDATE gold_inventory SET currentQuantity  = currentQuantity  - $1 WHERE id = $2;`,
+            query: `UPDATE "gold_inventory" SET "currentQuantity"  = "currentQuantity"  - $1 WHERE id = $2;`,
             value: [weight, gold_id]
         }
     }

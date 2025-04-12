@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/', validateSchema(schema.createOrder), async (req, res) => {
     const result = await orderController.createOrder(req, res)
-    console.log("result ==> ", result)
-    res.send(200)
+    res.send(result)
 })
 
 module.exports = router;

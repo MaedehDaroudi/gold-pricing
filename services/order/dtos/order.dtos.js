@@ -4,7 +4,7 @@ class Dtos {
         this.#createOrder = {}
     }
 
-    set createOrderModel(data) {
+    set createOrderDto(data) {
         this.#createOrder = {
             weight: data.weight,
             user_id: data.user_id,
@@ -17,7 +17,7 @@ class Dtos {
         }
     }
 
-    get createOrderModel() {
+    get createOrderDto() {
         return this.#createOrder
     }
 }

@@ -31,18 +31,7 @@ class PostgreSQL {
                 await new Promise(res => setTimeout(res, 5000));
             }
         }
-
-        await this.init();
         return this.pool;
-    }
-
-    static async init() {
-        try {
-            await this.pool.query(Queries.initDb());
-        }
-        catch (error) {
-            console.error('Error creating table:', error);
-        }
     }
 
     static async query(text, params) {

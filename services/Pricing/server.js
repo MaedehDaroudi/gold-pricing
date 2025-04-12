@@ -8,11 +8,11 @@ class Server {
 
     static async connect() {
         const app = express();
-        app.use('/api/pricing',routes);
-
+        app.use(express.json());
+        app.use('/api/pricing', routes);
         const server = http.createServer(app);
-        server.listen(process.env.PRICING_SERVER_PORT, () => {
-            console.log('Server is running');
+        server.listen(process.env.MARKET_DATA_SERVER_PORT || 8004, () => {
+            console.log('Server is running in port: ', process.env.MARKET_DATA_SERVER_PORT || 8004);
         });
     }
 }

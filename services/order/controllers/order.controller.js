@@ -8,10 +8,10 @@ class OrderController {
     async createOrder(req, res) {
         try {
             const dtos = new Dtos();
-            dtos.createOrderModel = req.body
-            const createOrderModel = dtos.createOrderModel
-            const result = await orderBusinessLogic.createOrder(createOrderModel)
-            res.send(Response.generate(200, result))
+            dtos.createOrderDto = req.body
+            const createOrderDto = dtos.createOrderDto
+            const result = await orderBusinessLogic.createOrder(createOrderDto)
+            return Response.generate(200, result)
         }
         catch (error) {
             res.status(error.status || 500).send(error)

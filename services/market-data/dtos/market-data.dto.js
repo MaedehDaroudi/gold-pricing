@@ -11,7 +11,7 @@ class MarketDataDtol {
         this.#receiveGoldData = null
     }
 
-    set fetchGoldDataModel(data) {
+    set fetchGoldDataDto(data) {
         this.#fetchGolData = {
             method: 'get',
             maxBodyLength: Infinity,
@@ -20,15 +20,15 @@ class MarketDataDtol {
         }
     }
 
-    set receiveGoldDataModel(data) {
+    set receiveGoldDataDto(data) {
         this.#receiveGoldData = {}
     }
 
-    get fetchGoldDataModel() {
+    get fetchGoldDataDto() {
         return this.#fetchGolData;
     }
 
-    get receiveGoldDataModel() {
+    get receiveGoldDataDto() {
         return this.#receiveGoldData;
     }
 }

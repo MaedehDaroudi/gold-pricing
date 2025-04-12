@@ -1,3 +1,6 @@
+const { readFileSync } = require('fs');
+const path = require('path');
+
 const { Pool } = require('pg');
 const Queries = require('../repository/queries')
 
@@ -35,13 +38,12 @@ class PostgreSQL {
         await this.init();
         return this.pool;
     }
-
     static async init() {
         try {
-            await this.pool.query(Queries.initDb());
-        }
-        catch (error) {
-            console.error('Error creating table:', error);
+            const sql = readFileSync(path.join(__dirname, './sql/init_db.sql')).toString();
+            await this.pool.query(sql);
+        } catch (error) {
+            console.error('Error executing init_db.sql:', error);
         }
     }
 
