@@ -12,15 +12,14 @@ class OrderBusinessLogic {
             orderRepository.receiveGoldStatus(data.status_id),
             orderRepository.receiveGoldInventory(data.gold_id),
         ])
-        await this.#checkAbilityContinues(data,users, goldStatus, goldInventory)
+        await this.#checkAbilityContinues(data, users, goldStatus, goldInventory)
         await orderRepository.fetchMarketData()
         data.market_data_id = (await orderRepository.receiveMarketData()).data?.result?.id
-        // orderRepository.receiveMarketData(data.market_data_id)
         const result = await orderRepository.createOrder(data);
         return result
     }
 
-    async #checkAbilityContinues(data,users, goldStatus, goldInventory) {
+    async #checkAbilityContinues(data, users, goldStatus, goldInventory) {
         const models = new Models();
         await Promise.allSettled([
             this.#checkValid(users, 'user', models),
@@ -33,7 +32,7 @@ class OrderBusinessLogic {
 
         await Promise.all([
             this.#isActive(goldStatus),
-            this.#hasQuantity(data.weight,goldInventory),
+            this.#hasQuantity(data.weight, goldInventory),
             this.#isValidStatus(goldInventory),
         ])
     }
@@ -43,8 +42,8 @@ class OrderBusinessLogic {
             models.invalidModel = title
     }
 
-    #hasQuantity(weight,goldInventory) {
-        if (goldInventory.value.quantity < weight )
+    #hasQuantity(weight, goldInventory) {
+        if (goldInventory.value.currentQuantity < weight)
             throw response.generate(400, response.messages.InsufficientProductInventory)
     }
 
